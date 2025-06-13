@@ -29,7 +29,7 @@ public class ResearchService {
         String prompt = buildPrompt(request);
         // Query the AI model API
         Map<String,Object> requestBody = Map.of(
-                "content" ,new Object[]{
+                "contents" ,new Object[]{
                         Map.of("parts" , new Object[]{
                                 Map.of("text",prompt)
                         })
@@ -60,9 +60,11 @@ public class ResearchService {
                     return firstCandidate.getContent().getParts().get(0).getText();
                 }
             }
+            return  "No response found! try again...";
         }catch (Exception e){
             return "Error Parsing: " +e.getMessage();
         }
+
     }
 
     private String buildPrompt(ResearchRequest request){
